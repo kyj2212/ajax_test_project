@@ -1,17 +1,14 @@
 package com.yejin.article.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 public class ArticleDto {
 
@@ -19,6 +16,9 @@ public class ArticleDto {
     private String title;
     private String body;
     private String writer;
+    //private LocalDateTime datetime;
+    //private LocalDate createDate;
+   // private LocalDate modifyDate;
     private Date date;
 
 

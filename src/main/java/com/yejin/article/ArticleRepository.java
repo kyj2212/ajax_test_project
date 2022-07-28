@@ -2,9 +2,12 @@ package com.yejin.article;
 
 import com.yejin.article.dto.ArticleDto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ArticleRepository {
 
@@ -20,6 +23,20 @@ public class ArticleRepository {
     }
 */
 
+
+    static {
+        makeTestData();
+    }
+
+    private static void makeTestData() {
+        IntStream.rangeClosed(1, 10).forEach(id -> {
+            String title = "제목%d".formatted(id);
+            String body = "내용%d".formatted(id);
+            String writer = "작성자%d".formatted(id);
+            write(title, body,writer);
+        });
+    }
+
     private ArticleRepository(){
         articleDtoList=new ArrayList<>();
         lastId=0;
@@ -33,10 +50,11 @@ public class ArticleRepository {
 
 
 
-
-    public long write(String title, String body,String writer){
+    // why static ??
+    public static long write(String title, String body,String writer){
         long id = ++lastId;
         ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, new Date());
+        //ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, LocalDate.now(),LocalDate.now());
         articleDtoList.add(newArticleDto);
         return id;
     }
@@ -75,7 +93,8 @@ public class ArticleRepository {
 
     public void modify(long id, String title, String body,String writer) {
         int idx=getIdx(id);
-        ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, new Date());
+        ArticleDto newArticleDto = new ArticleDto(id,title,body, writer,new Date());
+       // ArticleDto newArticleDto = new ArticleDto(id,title,body, writer,articleAt(id).getCreateDate(), LocalDate.now());
         //articleDtoList.remove(id);
         articleDtoList.set(idx,newArticleDto);
     }
