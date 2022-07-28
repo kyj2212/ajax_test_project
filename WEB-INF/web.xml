@@ -1,0 +1,21 @@
+<web-app
+
+
+    metadata-complete="false">
+
+
+    <!-- 1. aliases 설정 -->
+    <servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>com.yejin.HelloServlet</servlet-class>
+    </servlet>
+
+    <!-- 2. 매핑 -->
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+
+
+</web-app>
