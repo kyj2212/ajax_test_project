@@ -1,3 +1,3 @@
-# tomcat test project
+# ajax test project
 
-##### 07.19
+##### 07.28
