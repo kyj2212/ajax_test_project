@@ -20,29 +20,6 @@
 				<!-- articles -->
 				<div class="w-full md:pr-12 mb-12">
 
-                <!-- ajax 로 최신글 가져오기 -->
-
-			    <div class="px-0 py-20 mb-6 border-t border-b">
-			    <script>
-			        console.log('1');
-			        function Article__loadLatest(){
-			            console.log('2');
-			            fetch('/usr/article/getArticles/free')
-			                .then((response)=>response.json()) <!-- json 파싱하는 역할 -->
-			                .then((responseData) => {
-			                    console.log('3');
-			                    $('.place-1').append(responseData.resultCode +"<br />");
-			                    console.log(data);});
-   			            console.log('4'); <!-- fetch를 하면 일단 응답이 오기 전에 url로 실행(?)부터 하고 응답이 오면 then()을 실행한다.-->
-			        }
-
-			    </script>
-
-			        <button onclick="Article__loadLatest();" class="btn btn-sm">최신글 가져오기</button>
-			        <div class="place-1"></div>
-			    </div>
-
-
                     <!--%for( ArticleDto article : articles) {%-->
                     <c:forEach items="${articles}" var="article">
 					<article class="mb-12">
@@ -63,11 +40,38 @@
 						</p>
 					</article>
                     </c:forEach>
+                    <article class="place-latest mb-12"></article>
 
                      <!--/ articles -->
 
                      <button class="block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
                      onclick="location.href='/usr/article/write/free'">자유게시판 글쓰기</button>
+
+                    <!-- ajax 로 최신글 가져오기 -->
+                    <div class="px-0 py-3 mb-6 border-t border-b">
+                    <script>
+                        //console.log('1');
+                        function Article__loadLatest(){
+                            //console.log('2');
+                            fetch('/usr/article/getArticles/free')
+                                .then((response)=>response.json()) <!-- json 파싱하는 역할 -->
+                                .then((responseData) => {
+                                   // console.log('3');
+                                    const articleDtoList = responseData.data;
+                                    const latestArticle = articleDtoList[articleDtoList.length -1];
+                                    const content = new Date() +" : " + latestArticle.title + "<br />";
+                                    $('.place-latest').empty().prepend(content);
+                                    $('.place-1').append(new Date() +" : "+ latestArticle.body +"<br />");  // append 는 뒤에 //prepend 는 앞에 //empty()는 비우기
+                                    //console.log(data);
+                                    });
+                          //  console.log('4');// fetch를 하면 일단 응답이 오기 전에 url로 실행(?)부터 하고 응답이 오면 then()을 실행한다.
+                        }
+
+                    </script>
+                        <button onclick="Article__loadLatest();" class="btn btn-sm mb-3">최신글 가져오기</button>
+                        <div class="place-1"></div>
+                    </div>
+
 
 			    </div>
 

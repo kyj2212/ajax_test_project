@@ -26,6 +26,11 @@ public class ArticleController {
         rq.view("/usr/article/list");
 
     }
+    public void showListAuto(Rq rq) {
+        rq.view("/usr/article/listAuto");
+
+    }
+
 
 
     public void showWrite(Rq rq) {
@@ -168,4 +173,5 @@ public class ArticleController {
         // 아예 rq에서 성공인지도 체크해
         rq.successJson(articleDtos);
     }
+
 }
