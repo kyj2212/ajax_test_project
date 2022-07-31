@@ -30,7 +30,7 @@
 						<div class="mb-4 text-sm text-gray-700">
 							by <a href="#" class="text-gray-700"> ${article.writer} </a>
 							<span class="font-bold mx-1"> | </span>
-							<a href="#" class="text-gray-700">on ${article.date} </a>
+							<a href="#" class="text-gray-700">on ${article.createDate} </a>
 							<!--span class="font-bold mx-1"> | </span-->
 							<!--a href="#" class="text-gray-700">0 Comments</a-->
 						</div>

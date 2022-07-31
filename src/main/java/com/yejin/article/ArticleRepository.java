@@ -11,23 +11,26 @@ import java.util.stream.IntStream;
 
 public class ArticleRepository {
 
-    private static ArticleRepository instance;
+ //   private static ArticleRepository instance;
     private static List<ArticleDto> articleDtoList;
-
     private static long lastId;
+
+
+        static {
+            articleDtoList=new ArrayList<>();
+            lastId=0;
+            makeTestData();
+        }
 
 /*
     static {
-        articleDtoList=new ArrayList<>();
+        makeTestData();
+    }*/
+/*    private ArticleRepository(){
+        articleDtoList=ArticleRepository.getInstance();
         lastId=0;
     }
-*/
-
-
-    static {
-        makeTestData();
-    }
-
+    */
     private static void makeTestData() {
         IntStream.rangeClosed(1, 10).forEach(id -> {
             String title = "제목%d".formatted(id);
@@ -37,10 +40,8 @@ public class ArticleRepository {
         });
     }
 
-    private ArticleRepository(){
-        articleDtoList=new ArrayList<>();
-        lastId=0;
-    }
+
+/*
 
     public static ArticleRepository getInstance(){
         if(instance==null)
@@ -48,13 +49,14 @@ public class ArticleRepository {
         return instance;
     }
 
+*/
 
 
     // why static ??
     public static long write(String title, String body,String writer){
         long id = ++lastId;
-        ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, new Date());
-        //ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, LocalDate.now(),LocalDate.now());
+        //ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, new Date());
+        ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, LocalDate.now(),LocalDate.now());
         articleDtoList.add(newArticleDto);
         return id;
     }
@@ -93,8 +95,8 @@ public class ArticleRepository {
 
     public void modify(long id, String title, String body,String writer) {
         int idx=getIdx(id);
-        ArticleDto newArticleDto = new ArticleDto(id,title,body, writer,new Date());
-       // ArticleDto newArticleDto = new ArticleDto(id,title,body, writer,articleAt(id).getCreateDate(), LocalDate.now());
+       // ArticleDto newArticleDto = new ArticleDto(id,title,body, writer,new Date());
+        ArticleDto newArticleDto = new ArticleDto(id,title,body, writer,articleAt(id).getCreateDate(), LocalDate.now());
         //articleDtoList.remove(id);
         articleDtoList.set(idx,newArticleDto);
     }

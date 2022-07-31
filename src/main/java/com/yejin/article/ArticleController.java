@@ -2,6 +2,7 @@ package com.yejin.article;
 
 import com.yejin.Rq;
 import com.yejin.article.dto.ArticleDto;
+import com.yejin.util.Ut;
 
 
 import java.util.ArrayList;
@@ -126,5 +127,13 @@ public class ArticleController {
         // rq.appendBody("<div>title : %s</div>".formatted(title));
         // rq.appendBody("<div>body : %s</div>".formatted(body));
        // rq.appendBody("<button><a href =\"/usr/article/list/free\">게시물 목록</a></button>");
+    }
+
+    public void getArticles(Rq rq) {
+        // 모든 articles 다 json 으로
+        List<ArticleDto> articleDtos = articleService.findAll();
+        String articles = Ut.json.toStr(articleDtos, "");
+        rq.println(articles);
+
     }
 }

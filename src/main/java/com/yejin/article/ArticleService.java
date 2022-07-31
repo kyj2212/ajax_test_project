@@ -10,7 +10,8 @@ public class ArticleService {
 
     ArticleService(){
         //articleRepository = new ArticleRepository();
-        articleRepository = ArticleRepository.getInstance();
+       // articleRepository = ArticleRepository.getInstance();
+        articleRepository = new ArticleRepository();
     }
 
     public long write(String title, String body,String writer){

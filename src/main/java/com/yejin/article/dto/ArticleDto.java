@@ -10,16 +10,14 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ArticleDto {
 
     private long id;
     private String title;
     private String body;
     private String writer;
-    //private LocalDateTime datetime;
-    //private LocalDate createDate;
-   // private LocalDate modifyDate;
-    private Date date;
-
+    private LocalDate createDate;
+    private LocalDate modifyDate;
 
 }
