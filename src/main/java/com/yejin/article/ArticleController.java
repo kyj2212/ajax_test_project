@@ -132,8 +132,9 @@ public class ArticleController {
     public void getArticles(Rq rq) {
         // 모든 articles 다 json 으로
         List<ArticleDto> articleDtos = articleService.findAll();
-        String articles = Ut.json.toStr(articleDtos, "");
-        rq.println(articles);
-
+       // String articles = Ut.json.toStr(articleDtos, "");
+        //rq.println(articles);
+       // rq.println(rq.json(articleDtos));
+        rq.json(articleDtos);
     }
 }

@@ -1,5 +1,6 @@
 package com.yejin;
 
+import com.yejin.util.Ut;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -180,4 +181,22 @@ public class Rq {
                 </script>
                 """);
     }
+
+    public void setContentType(String str){
+        resp.setContentType(str);
+    }
+
+    public void json(Object data){
+        // response 응답의 contentType 을 json 으로 바꾸고
+        setContentType("application/json; charset=utf-8");
+
+        // date를 json으로 바꾼다.
+       // return Ut.json.toStr(data,"");
+        String jsonStr = Ut.json.toStr(data,"");
+        // println 하는것까지 json에 넣어버리기
+        println(jsonStr);
+
+    }
+
+
 }
