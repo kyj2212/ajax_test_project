@@ -27,6 +27,9 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
+    public List<ArticleDto> findAllFromId(long fromId) {
+        return articleRepository.findAllFromId(fromId);
+    }
     public ArticleDto articleAt(long id) {
         return articleRepository.articleAt(id);
     }
@@ -42,4 +45,6 @@ public class ArticleService {
     public void delete(long id) {
         articleRepository.delete(id);
     }
+
+
 }

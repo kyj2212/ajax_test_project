@@ -93,7 +93,7 @@ public class Rq {
     public long getLongParam(String param, long defaultValue){
 
         String value = req.getParameter(param);
-        System.out.println(param+" : "+value);
+       // System.out.println(param+" : "+value);
         if(value==null)
             return defaultValue;
         try{

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ArticleRepository {
@@ -69,6 +70,25 @@ public class ArticleRepository {
         return articleDtoList;
     }
 
+    public List<ArticleDto> findAllFromId(long fromId) {
+        //List<ArticleDto> articleDtosFromdId = articleDtoList.subList(fromId,articleDtoList.size());
+        // list의 index와 article 객체의 인스턴스 id는 다른 값이다.
+        // 따라서 id 값이 formId 인 값부터 쭉이니까 for에서 id를 체크해서 크거나 같은 값들만 뿜어야 한다.
+/*
+        List<ArticleDto> articleDtosFromdId = new ArrayList<>();
+        for(ArticleDto articleDto : articleDtoList){
+            if(articleDto.getId()>=fromId)
+                articleDtosFromdId.add(articleDto);
+        }
+        return articleDtosFromdId;
+*/
+
+        // stream으로 동일하게 구현해보기!!!
+        // 처음에 filter에서 변수명을 a 라고 뒀으나, articleDto로 두는게 더 직관적으로 보일것 같음
+        return articleDtoList.stream().filter(articleDto->articleDto.getId()>=fromId).collect(Collectors.toList());
+
+    }
+
     public ArticleDto articleAt(long id) {
         for(ArticleDto article :  articleDtoList){
             if(article.getId()==id)
@@ -105,4 +125,6 @@ public class ArticleRepository {
         int idx=getIdx(id);
         articleDtoList.remove(idx);
     }
+
+
 }

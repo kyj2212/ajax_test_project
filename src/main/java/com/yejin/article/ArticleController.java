@@ -129,8 +129,17 @@ public class ArticleController {
     }
 
     public void getArticles(Rq rq) {
+
+        // 값이 없으면 id 에 상관없이 findAll 해야함, id가 음수일 수 없다면, 그냥 defaultValue를 0으로 하면 되는 것이 아닌지?
+        long fromId = rq.getLongParam("fromId",0);
+
+
+
+
         // 모든 articles 다 json 으로
-        List<ArticleDto> articleDtos = articleService.findAll();
+        //List<ArticleDto> articleDtos = articleService.findAll();
+        // 이제 fromId 부터 끝까지 json 으로
+        List<ArticleDto> articleDtos = articleService.findAllFromId(fromId);
        // String articles = Ut.json.toStr(articleDtos, "");
         //rq.println(articles);
        // rq.println(rq.json(articleDtos));
