@@ -26,25 +26,27 @@
                               //  addArticle(article);
                             }
                         });
-
                 },10000000);
 
                 let Articles__lastId = 0;
                 let articles;
                 function Articles__loadMore(){
-                    fetch('/usr/article/getArticles/free')
+                    fetch(`/usr/article/getArticles/free?fromId=\${Articles__lastId}`) // 현재 리스트의 마지막 id 보다 큰 값들만 불러와
                         .then((response)=>response.json()) // json 파싱하는 역할
                         .then((responseData) => {
                             articles = responseData.data;
+                            if(articles.length >0){
+                                Articles__lastId=articles[articles.length-1].id;
+                            }
                             for(key in articles){
                                 const article=articles[key];
                                //console.log(articles[key].title);
                                 //const html =`<p>\${articles[key].title}</p>`;
                                 //const html =`<p>\${article.title}</p>`;
                                 //$('.place-article').append(html);
-
                                 addArticle(article);
                             }
+                            setTimeout(Articles__loadMore,3000); // 이렇게 안에 넣으면 한번이라도 버튼을 눌러서 fetch를 실행해야 이게 반복되는데?
                         });
                 }
                 function addArticle(article){
@@ -69,6 +71,7 @@
                     `;
                     $('.place-article').append(html);
                 }
+
 
 
             </script>
