@@ -1,5 +1,6 @@
 package com.yejin;
 
+import com.yejin.article.dto.ArticleDto;
 import com.yejin.util.Ut;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
 
 public class Rq {
 
@@ -186,17 +189,44 @@ public class Rq {
         resp.setContentType(str);
     }
 
-    public void json(Object data){
+    public void json(Object resultData){
         // response 응답의 contentType 을 json 으로 바꾸고
         setContentType("application/json; charset=utf-8");
 
         // date를 json으로 바꾼다.
        // return Ut.json.toStr(data,"");
-        String jsonStr = Ut.json.toStr(data,"");
+        String jsonStr = Ut.json.toStr(resultData,"");
         // println 하는것까지 json에 넣어버리기
         println(jsonStr);
 
     }
 
+    // 결과 코드와 msg 를 매개변수로 아예 받아버리는 경우도 있고
+    public void json(String resultCode, String msg,Object resultData){
+        json(new ResultData<>(resultCode,msg,resultData));
+    }
 
+    // 성공여부만 확인하고 싶을 때도 있고, 성공여부만 확인하는 케이스가 많기때문에 따로 method를 뺀다.
+    public void successJson(Object resultData) {
+        successJson("S-1","성공",resultData);
+    }
+
+    // 성공 여부만 확인하는데, S-2,3,4 이렇게 여러개 잇을 수 있으니까
+    public void successJson(String resultCode, String msg,Object resultData) {
+        try{
+            json(new ResultData<>(resultCode,msg,resultData));
+
+        } catch (RuntimeException e){ // 만약 처리하다가 에러가 난다면? fail로 간다고 생각했는데... 강사님은 예외처리 하지 않았음
+            failJson(resultData);
+        }
+    }
+
+
+    // 실패 여부만 확인하고 싶을 때도 있으니까
+    public void failJson(Object resultData) {
+        failJson(new ResultData<>("F-1","실패",resultData));
+    }
+    public void failJson(String resultCode, String msg,Object resultData) {
+        json(new ResultData<>(resultCode,msg,resultData));
+    }
 }

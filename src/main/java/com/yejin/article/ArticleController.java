@@ -1,5 +1,6 @@
 package com.yejin.article;
 
+import com.yejin.ResultData;
 import com.yejin.Rq;
 import com.yejin.article.dto.ArticleDto;
 import com.yejin.util.Ut;
@@ -134,8 +135,13 @@ public class ArticleController {
         //rq.println(articles);
        // rq.println(rq.json(articleDtos));
         //rq.json(articleDtos);
-        Map<String,Object> resultData = Ut.mapOf("resultCode","S-1","msg","성공","data",articleDtos);
 
-        rq.json(resultData);
+
+//        Map<String,Object> resultData = Ut.mapOf("resultCode","S-1","msg","성공","data",articleDtos);
+        // 항상 모든 json 은 resultcode 를 가진 data로 표현되어야 하므로, ResultData 클래스를 만들어버린다.
+       // ResultData<List<ArticleDto>> resultData = new ResultData("S-1","성공",articleDtos);
+       // rq.json(new ResultData("S-1","성공",articleDtos));
+        // 아예 rq에서 성공인지도 체크해
+        rq.successJson(articleDtos);
     }
 }
