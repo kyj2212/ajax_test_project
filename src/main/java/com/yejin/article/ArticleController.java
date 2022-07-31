@@ -5,9 +5,7 @@ import com.yejin.article.dto.ArticleDto;
 import com.yejin.util.Ut;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ArticleController {
 
@@ -135,6 +133,9 @@ public class ArticleController {
        // String articles = Ut.json.toStr(articleDtos, "");
         //rq.println(articles);
        // rq.println(rq.json(articleDtos));
-        rq.json(articleDtos);
+        //rq.json(articleDtos);
+        Map<String,Object> resultData = Ut.mapOf("resultCode","S-1","msg","성공","data",articleDtos);
+
+        rq.json(resultData);
     }
 }
