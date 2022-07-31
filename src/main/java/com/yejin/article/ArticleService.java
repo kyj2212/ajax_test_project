@@ -30,6 +30,9 @@ public class ArticleService {
     public List<ArticleDto> findAllFromId(long fromId) {
         return articleRepository.findAllFromId(fromId);
     }
+    public List<ArticleDto> findGreaterThanId(long fromId) {
+        return articleRepository.findGreaterThanId(fromId);
+    }
     public ArticleDto articleAt(long id) {
         return articleRepository.articleAt(id);
     }

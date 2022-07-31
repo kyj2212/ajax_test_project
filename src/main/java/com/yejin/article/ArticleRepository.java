@@ -88,6 +88,9 @@ public class ArticleRepository {
         return articleDtoList.stream().filter(articleDto->articleDto.getId()>=fromId).collect(Collectors.toList());
 
     }
+    public List<ArticleDto> findGreaterThanId(long fromId) {
+        return articleDtoList.stream().filter(articleDto->articleDto.getId()>fromId).collect(Collectors.toList());
+    }
 
     public ArticleDto articleAt(long id) {
         for(ArticleDto article :  articleDtoList){
@@ -125,6 +128,7 @@ public class ArticleRepository {
         int idx=getIdx(id);
         articleDtoList.remove(idx);
     }
+
 
 
 }
