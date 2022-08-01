@@ -327,7 +327,7 @@ public class ChatController {
 
        // rq.setAttr("room", chatRoom);
         System.out.println("%d번 메세지가 수정되었습니다.".formatted(id));
-        rq.json("S-1","%d번 메세지가 수정되었습니다.".formatted(id),id);
+        rq.json("S-1","%d번 메세지가 수정되었습니다.".formatted(id),chatMessageDto);
 
 
     }

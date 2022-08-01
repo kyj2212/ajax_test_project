@@ -147,7 +147,7 @@ function ChatMessageSave__submitForm(form) {
                     \${message.writer}
                 </a>
             </h2>
-            <p class="mb-5 text-gray-700 leading-normal">
+            <p class="message-body mb-5 text-gray-700 leading-normal">
                  \${message.body}
             </p>
             <form onsubmit="ChatMessages__modify(this); return false;">
@@ -195,16 +195,54 @@ function ChatMessages__modify(form) {
             {
                 body: form.body.value // 폼 내용, input name, value
             },
-            function(data) { // 콜백 메서드, 통신이 완료된 후, 실행
-                if(data.msg){
-                    alert(data.msg);
+            function(responseData) { // 콜백 메서드, 통신이 완료된 후, 실행
+                if(responseData.msg){
+                    alert(responseData.msg);
+                    console.log(responseData.data); // 이게 id 임. body를 받아야함.
+                   // form.body.value=responseData.data.body;
+                    console.log(form.body.value); // 이 폼이 아니라 그 위에 값에 넣어야되는구나
+                    console.log(responseData.data.body);
+                    $('.message-body').html(responseData.data.body);
+
                 }
             },
             'json' // 받은 데이터를 json 으로 해석하겠다.
         );
+      // 그 form.body에 대입
 
 }
 
+
+    function Messages__remove(messageId, btn){
+        alert(messageId);
+
+            $.post(
+                `/usr/chat/deleteMessageAjax/\${messageId}`, // 주소, action
+                {
+                },
+                function(data) { // 콜백 메서드, 통신이 완료된 후, 실행
+                    if(data.msg){
+                        alert(data.msg);
+                    }
+                   //$(btn).parent().remove();
+                    $(btn).closest('article').remove();
+                },
+                'json' // 받은 데이터를 json 으로 해석하겠다.
+            );
+
+    }
+
+</script>
+
+
+<script>
+// 현재는 새로 등록된 글만 load
+Messages__loadMore();
+// 남들이 삭제,수정한 내용도 실시간으로 load 를 바로바로하지는 않음. 일반적인 네이버, 유튜브 댓글의 수정,삭제를 바로바로 반영하지는 않음.
+</script>
+
+
+<!--script>
 //    let Messages__lastId = 0;
  //   let Messages;
     function Messages__loadAll(){
@@ -222,34 +260,7 @@ function ChatMessages__modify(form) {
                // setTimeout(Messages__loadMore,3000);
             });
     }
-    function Messages__remove(messageId, btn){
-        alert(messageId);
+</script-->
 
-            $.post(
-                `/usr/chat/deleteMessageAjax/\${messageId}`, // 주소, action
-                {
-
-                },
-                function(data) { // 콜백 메서드, 통신이 완료된 후, 실행
-                    if(data.msg){
-                        alert(data.msg);
-                    }
-                   //$(btn).parent().remove();
-                    $(btn).closest('article').remove();
-                },
-                'json' // 받은 데이터를 json 으로 해석하겠다.
-            );
-
-    }
-
-    </script>
-
-
-
-<script>
-// 현재는 새로 등록된 글만 load
-Messages__loadMore();
-// 남들이 삭제,수정한 내용도 실시간으로 load 를 바로바로하지는 않음. 일반적인 네이버, 유튜브 댓글의 수정,삭제를 바로바로 반영하지는 않음.
-</script>
 
 <%@ include file="../common/foot.jspf"%>
