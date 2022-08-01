@@ -56,4 +56,13 @@ public class ChatService {
     public ChatMessageDto findMessageById(long id) {
         return chatMessageRepository.findById(id);
     }
+
+    public long modifyMessageAjax(long messageId, String body) {
+        return chatMessageRepository.modifyMessageAjax(messageId,body);
+    }
+
+    public void modifyMessage(long id, String body) {
+        chatMessageRepository.modifyMessage(id,body);
+
+    }
 }

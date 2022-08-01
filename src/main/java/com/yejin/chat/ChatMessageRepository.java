@@ -75,4 +75,24 @@ public class ChatMessageRepository {
 
         return null;
     }
+
+    public long modifyMessageAjax(long id, String body) {
+        ChatMessageDto chatMessageDto=findById(id);
+        ChatMessageDto newchatMessageDto=new ChatMessageDto(id,chatMessageDto.getRoomId(),body,chatMessageDto.getWriter());
+        for (int i=0;i<chatMessageDtos.size();i++) {
+            if (chatMessageDtos.get(i).getId() == id) {
+
+                chatMessageDtos.set(i,newchatMessageDto);
+            }
+        }
+        return id;
+    }
+
+    public void modifyMessage(long id, String body) {
+        ChatMessageDto chatMessageDto=findById(id);
+        if (chatMessageDto == null) {
+            return;
+        }
+        chatMessageDto.setBody(body);
+    }
 }

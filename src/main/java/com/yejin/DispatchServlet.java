@@ -112,6 +112,9 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/chat/deleteMessageAjax":
                         chatController.deleteMessageAjax(rq);
                         break;
+                    case "/usr/chat/modifyMessageAjax":
+                        chatController.modifyMessageAjax(rq);
+                        break;
                 }
                 break;
         }

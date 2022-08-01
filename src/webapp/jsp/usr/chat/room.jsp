@@ -150,10 +150,15 @@ function ChatMessageSave__submitForm(form) {
             <p class="mb-5 text-gray-700 leading-normal">
                  \${message.body}
             </p>
-             <a href="/usr/chat/deleteMessage/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded" >수정</a>
-             <a href="/usr/chat/deleteMessage/${room.id}/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded">삭제</a>
+            <form onsubmit="ChatMessages__modify(this); return false;">
+                <input name="id" type="hidden" value="\${message.id}">
+                <input name="body" type="text" class="input boarder"value="\${message.body}">
+                <button type="submit" class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white" value="\${message.body}">수정</button>
+            </form>
+             <!--a href="/usr/chat/deleteMessage/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded" >수정</a-->
+             <!--a href="/usr/chat/deleteMessage/${room.id}/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded">삭제 no ajax</a-->
              <button class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
-             onclick="Messages__remove(\${message.id},this);">삭제2</button>
+             onclick="Messages__remove(\${message.id},this);">삭제</button>
             </article>
         `;
         $('.place-Message').append(html);
@@ -164,7 +169,6 @@ function ChatMessageSave__submitForm(form) {
         <!-- articles -->
         <div class="w-full md:pr-12 mb-12">
             <section class="place-Message">
-
             </section>
 
         <!--/ articles -->
@@ -177,6 +181,29 @@ function ChatMessageSave__submitForm(form) {
 
 
   <script>
+
+function ChatMessages__modify(form) {
+    console.log('modify');
+    form.body.value=form.body.value.trim();
+        if ( form.body.value.length == 0 ) {
+            form.body.focus();
+            return false;
+        }
+
+        $.post(
+            `/usr/chat/modifyMessageAjax/\${form.id.value}`, // 주소, action
+            {
+                body: form.body.value // 폼 내용, input name, value
+            },
+            function(data) { // 콜백 메서드, 통신이 완료된 후, 실행
+                if(data.msg){
+                    alert(data.msg);
+                }
+            },
+            'json' // 받은 데이터를 json 으로 해석하겠다.
+        );
+
+}
 
 //    let Messages__lastId = 0;
  //   let Messages;
@@ -207,7 +234,8 @@ function ChatMessageSave__submitForm(form) {
                     if(data.msg){
                         alert(data.msg);
                     }
-                    $(btn).parent().remove();
+                   //$(btn).parent().remove();
+                    $(btn).closest('article').remove();
                 },
                 'json' // 받은 데이터를 json 으로 해석하겠다.
             );
