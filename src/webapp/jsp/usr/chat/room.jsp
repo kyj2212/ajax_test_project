@@ -59,64 +59,16 @@ function ChatMessageSave__submitForm(form) {
 <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
   <form method="POST" onsubmit="ChatMessageSave__submitForm(this); return false;">
     <div class="form-group mb-6">
-      <input autofocus name="writer" type="text" class="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
+      <input autofocus name="writer" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
              placeholder="이름을 입력해주세요.">
     </div>
     <div class="form-group mb-6">
       <textarea name="body"
-              class="
-        form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      "
-              id="exampleFormControlTextarea13"
-              rows="3"
-              placeholder="내용을 입력해주세요"
-      ></textarea>
+              class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id="exampleFormControlTextarea13" rows="3"
+              placeholder="내용을 입력해주세요"></textarea>
     </div>
-    <button type="submit" class="
-      w-full
-      px-6
-      py-2.5
-      bg-blue-600
-      text-white
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      rounded
-      shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
-      transition
-      duration-150
-      ease-in-out">메세지 작성</button>
+    <button type="submit" class=" w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+      메세지 작성</button>
   </form>
 
 
@@ -150,37 +102,53 @@ function ChatMessageSave__submitForm(form) {
             <p class="message-body mb-5 text-gray-700 leading-normal">
                  \${message.body}
             </p>
-            <form onsubmit="ChatMessages__modify(this); return false;">
+            <form class="hidden" onsubmit="ChatMessages__modify(this); return false;">
                 <input name="id" type="hidden" value="\${message.id}">
-                <input name="body" type="text" class="input boarder"value="\${message.body}">
-                <button type="submit" class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white" value="\${message.body}">수정</button>
+                <!--input name="body" type="text" class="input boarder"value="\${message.body}"-->
+                    <div class="form-group mb-6">
+                      <textarea name="body"
+                              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " rows="3"
+                              placeholder="내용을 입력해주세요">\${message.body}</textarea>
+                    </div>
+                        <button type="submit"
+                        class=" w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                        수정</button>
+                <!--button type="submit" class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white" value="\${message.body}">수정</button-->
             </form>
              <!--a href="/usr/chat/deleteMessage/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded" >수정</a-->
              <!--a href="/usr/chat/deleteMessage/${room.id}/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded">삭제 no ajax</a-->
-             <button class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+             <div class="mt-5 block mb-4 ">
+             <button class="px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
              onclick="Messages__remove(\${message.id},this);">삭제</button>
+             <button class="btn-modify px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+             onclick="Messages__ShowModify(this);">수정</button>
+             </div>
             </article>
         `;
         $('.place-Message').append(html);
     }
     </script>
 
-    <div class="container max-w-4xl mx-auto md:flex items-start py-8 px-12 md:px-0">
-        <!-- articles -->
-        <div class="w-full md:pr-12 mb-12">
-            <section class="place-Message">
-            </section>
 
-        <!--/ articles -->
-             <button class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
-             onclick="Messages__loadMore()">리프레시</button>
-        </div>
-
-    </div>
-</div>
 
 
   <script>
+function Messages__hideModify(btn){
+    //console.log('click');
+//    if($(form).hasClass("hidden")==false)
+    //$(form).addClass("hidden");
+    $(btn).closest('article').find('form').addClass("hidden");
+   // console.log($(form).hasClass("hidden"));
+   // console.log($(btn).closest('form').hasClass("hidden"));
+}
+function Messages__ShowModify(btn){
+    //console.log('click');
+    //console.log($(btn).parent().prev().hasClass("hidden"));
+    console.log($(btn).closest('article').find('form').hasClass("hidden"));
+    $(btn).closest('article').find('form').removeClass("hidden");
+   // $(btn).parent().prev().removeClass("hidden");
+   // console.log($(btn).closest('form').hasClass("hidden"));
+}
 
 function ChatMessages__modify(form) {
     console.log('modify');
@@ -202,7 +170,9 @@ function ChatMessages__modify(form) {
                    // form.body.value=responseData.data.body;
                     console.log(form.body.value); // 이 폼이 아니라 그 위에 값에 넣어야되는구나
                     console.log(responseData.data.body);
-                    $('.message-body').html(responseData.data.body);
+                   // $('.message-body').html(responseData.data.body);
+                    $(form).closest('article').find('.message-body').html(form.body.value);
+                    Messages__hideModify(form);
 
                 }
             },
@@ -261,6 +231,21 @@ Messages__loadMore();
             });
     }
 </script-->
+
+
+    <div class="container max-w-4xl mx-auto md:flex items-start py-8 px-12 md:px-0">
+        <!-- articles -->
+        <div class="w-full md:pr-12 mb-12">
+            <section class="place-Message">
+            </section>
+
+        <!--/ articles -->
+             <button class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+             onclick="Messages__loadMore()">리프레시</button>
+        </div>
+
+    </div>
+  </div>
 
 
 <%@ include file="../common/foot.jspf"%>
