@@ -8,9 +8,9 @@
 
 			<!-- title -->
 			<div class="text-center px-6 py-12 mb-6 bg-gray-100 border-b">
-				<h1 class=" text-xl md:text-4xl pb-4">Articles</h1>
+				<h1 class=" text-xl md:text-4xl pb-4">ChatRoom List</h1>
 				<p class="leading-loose text-gray-dark">
-					여기는 게시글 목록입니다
+					여기는 채팅방 목록입니다
 				</p>
 			</div>
 			<!-- /title -->
@@ -20,24 +20,19 @@
 				<!-- articles -->
 				<div class="w-full md:pr-12 mb-12">
 
-                    <!--%for( ArticleDto article : articles) {%-->
-                    <c:forEach items="${articles}" var="article">
+                    <c:forEach items="${rooms}" var="room">
 					<article class="mb-12">
 						<h2 class="mb-4">
-							<a href="/usr/article/detail/free/${article.id}" class="text-black text-xl md:text-2xl no-underline hover:underline">
-								${article.title}
+							<a href="/usr/chat/room/${room.id}" class="text-black text-xl md:text-2xl no-underline hover:underline">
+								${room.title}
 							</a>
 						</h2>
-						<div class="mb-4 text-sm text-gray-700">
-							by <a href="#" class="text-gray-700"> ${article.writer} </a>
-							<span class="font-bold mx-1"> | </span>
-							<a href="#" class="text-gray-700">on ${article.createDate} </a>
-							<!--span class="font-bold mx-1"> | </span-->
-							<!--a href="#" class="text-gray-700">0 Comments</a-->
-						</div>
 						<p class="text-gray-700 leading-normal">
-							${article.body}
+							${room.body}
 						</p>
+                         <button class="block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+                         onclick="location.href='/usr/chat/modifyRoom/${room.id}'">채팅방 수정</button>
+
 					</article>
                     </c:forEach>
                     <article class="place-latest mb-12"></article>
@@ -45,7 +40,7 @@
                      <!--/ articles -->
 
                      <button class="block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
-                     onclick="location.href='/usr/article/write/free'">자유게시판 글쓰기</button>
+                     onclick="location.href='/usr/chat/createRoom'">채팅방 생성</button>
 
                     <!-- ajax 로 최신글 가져오기 -->
                     <!--div class="px-0 py-3 mb-6 border-t border-b">

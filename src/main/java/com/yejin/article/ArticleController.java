@@ -3,6 +3,7 @@ package com.yejin.article;
 import com.yejin.ResultData;
 import com.yejin.Rq;
 import com.yejin.article.dto.ArticleDto;
+import com.yejin.chat.dto.ChatMessageDto;
 import com.yejin.util.Ut;
 
 
@@ -52,7 +53,19 @@ public class ArticleController {
         String body = rq.getParam("body","");
         String writer = rq.getParam("writer","");
 
-        // title,body 값이 없는 경우 앞단의 jsp 에서 js를 통해 이미 체크함
+        // title,body 값이 없는 경우 앞단의 jsp 에서 js를 통해 이미 체크하였지만 체크하기
+        if (title.length() == 0) {
+            rq.historyBack("제목을 입력해주세요.");
+            return;
+        }
+        if (body.length() == 0) {
+            rq.historyBack("내용을 입력해주세요.");
+            return;
+        }
+        if (writer.length() == 0) {
+            rq.historyBack("작성자를 입력해주세요.");
+            return;
+        }
         long id = articleService.write(title,body,writer);
         rq.appendBody("<div>%d 번 게시물이 등록되었습니다.</div>".formatted(id));
         rq.appendBody("<div>title : %s</div>".formatted(title));
@@ -173,5 +186,6 @@ public class ArticleController {
         // 아예 rq에서 성공인지도 체크해
         rq.successJson(articleDtos);
     }
+
 
 }

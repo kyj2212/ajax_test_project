@@ -1,6 +1,7 @@
 package com.yejin;
 
 import com.yejin.article.ArticleController;
+import com.yejin.chat.ChatController;
 import com.yejin.member.MemberController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,6 +21,7 @@ public class DispatchServlet extends HttpServlet {
 
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
+        ChatController chatController = new ChatController();
 
         String url = req.getRequestURI();
 
@@ -61,6 +63,30 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/member/login":
                         memberController.showLogin(rq);
                         break;
+                    case "/usr/chat/createRoom":
+                        chatController.showCreateRoom(rq);
+                        break;
+                    case "/usr/chat/modifyRoom":
+                        chatController.showModifyRoom(rq);
+                        break;
+                    case "/usr/chat/roomList":
+                        chatController.showRoomList(rq);
+                        break;
+                    case "/usr/chat/deleteRoom":
+                        chatController.deleteRoom(rq);
+                        break;
+                    case "/usr/chat/room":
+                        chatController.showRoom(rq);
+                        break;
+                    case "/usr/chat/roomManual":
+                        chatController.showRoomManual(rq);
+                        break;
+                    case "/usr/chat/getMessages":
+                        chatController.getMessages(rq);
+                        break;
+                    case "/usr/chat/deleteMessage":
+                        chatController.deleteMessage(rq);
+                        break;
                 }
                 break;
             case "POST":
@@ -70,6 +96,21 @@ public class DispatchServlet extends HttpServlet {
                         break;
                     case "/usr/article/modify":
                         articleController.doModify(rq);
+                        break;
+                    case "/usr/chat/createRoom":
+                        chatController.doCreateRoom(rq);
+                        break;
+                    case "/usr/chat/modifyRoom":
+                        chatController.doModifyRoom(rq);
+                        break;
+                    case "/usr/chat/writeMessage":
+                        chatController.doWriteMessage(rq);
+                        break;
+                    case "/usr/chat/writeMessageAjax":
+                        chatController.doWriteMessageAjax(rq);
+                        break;
+                    case "/usr/chat/deleteMessageAjax":
+                        chatController.deleteMessageAjax(rq);
                         break;
                 }
                 break;

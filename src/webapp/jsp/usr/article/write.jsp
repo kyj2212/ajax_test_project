@@ -57,16 +57,16 @@ function ArticleSave__submitForm(form){
     </form>
     </div-->
 <div>
-    <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:grid md:grid-cols-6 md:gap-6">
         <div class="md:col-span-1">
-            <div class="px-4 sm:px-0">
+            <div class="mx-4 mt-4 text-center px-4 sm:px-0">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">Article</h3>
                 <p class="mt-1 text-sm text-gray-600">
                     게시글 작성
                 </p>
             </div>
         </div>
-        <div class="mt-5 md:mt-0 md:col-span-2">
+        <div class="mt-5 md:mt-0 md:col-span-4">
             <form method="POST" onsubmit="ArticleSave__submitForm(this); return false;">
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
