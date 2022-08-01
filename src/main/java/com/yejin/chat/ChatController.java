@@ -21,16 +21,17 @@ public class ChatController {
         String title= rq.getParam("title","");
         String body = rq.getParam("body","");
         String writer = rq.getParam("writer","");
+
         if (title.length() == 0) {
-            rq.historyBack("제목을 입력해주세요.");
+            rq.historyBack("채팅방 이름을 입력해주세요.");
             return;
         }
         if (body.length() == 0) {
-            rq.historyBack("내용을 입력해주세요.");
+            rq.historyBack("채팅방 설명을 입력해주세요.");
             return;
         }
         if (writer.length() == 0) {
-            rq.historyBack("작성자를 입력해주세요.");
+            rq.historyBack("채팅방 소유자를 입력해주세요.");
             return;
         }
 
@@ -276,14 +277,14 @@ public class ChatController {
         long id = rq.getLongPathValueByIndex(0, 0);
 
         if (id == 0) {
-            rq.historyBack("번호를 입력해주세요.");
+            rq.failJson("번호를 입력해주세요.");
             return;
         }
 
         ChatMessageDto chatMessageDto = chatService.findMessageById(id);
 
         if (chatMessageDto == null) {
-            rq.historyBack("해당 메세지가 존재하지 않습니다.");
+            rq.failJson("해당 메세지가 존재하지 않습니다.");
             return;
         }
 
@@ -327,7 +328,8 @@ public class ChatController {
 
        // rq.setAttr("room", chatRoom);
         System.out.println("%d번 메세지가 수정되었습니다.".formatted(id));
-        rq.json("S-1","%d번 메세지가 수정되었습니다.".formatted(id),chatMessageDto);
+       // rq.json("S-1","%d번 메세지가 수정되었습니다.".formatted(id),chatMessageDto);
+        rq.json("S-1","%d번 메세지가 수정되었습니다.".formatted(id),id);
 
 
     }

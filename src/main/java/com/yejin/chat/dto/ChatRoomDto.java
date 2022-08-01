@@ -13,6 +13,7 @@ public class ChatRoomDto {
     private long id;
     private String title;
     private String body;
+    private String writer;
 
 }
 

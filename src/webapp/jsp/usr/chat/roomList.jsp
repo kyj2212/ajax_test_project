@@ -27,12 +27,20 @@
 								${room.title}
 							</a>
 						</h2>
+                        <div class="mb-4 text-sm text-gray-700">
+                            by <a href="#" class="text-gray-700"> ${room.writer} </a>
+                        </div>
 						<p class="text-gray-700 leading-normal">
 							${room.body}
 						</p>
-                         <button class="block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+                         <!--button class="block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
                          onclick="location.href='/usr/chat/modifyRoom/${room.id}'">채팅방 수정</button>
-
+                          <div class="mt-5 block mb-4 ">
+                          <button class="px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+                          onclick="Messages__remove(\${message.id},this);">삭제</button>
+                          <button class="btn-modify px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white"
+                          onclick="Messages__ShowModify(this);">수정</button>
+                          </div-->
 					</article>
                     </c:forEach>
                     <article class="place-latest mb-12"></article>

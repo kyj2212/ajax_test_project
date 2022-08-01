@@ -18,7 +18,7 @@ public class ChatRoomRepository {
         makeTestData();
     }
     private static void makeTestData() {
-        IntStream.rangeClosed(1, 10).forEach(id -> {
+        IntStream.rangeClosed(1, 3).forEach(id -> {
             String title = "채팅방%d".formatted(id);
             String body = "채팅방이름%d".formatted(id);
             String writer = "채팅방주인%d".formatted(id);
@@ -28,7 +28,7 @@ public class ChatRoomRepository {
     public static long create(String title, String body, String writer) {
         long id = ++lastId;
         //ArticleDto newArticleDto = new ArticleDto(id,title,body, writer, new Date());
-        ChatRoomDto newChatRoomDto = new ChatRoomDto(id,title,body);
+        ChatRoomDto newChatRoomDto = new ChatRoomDto(id,title,body,writer);
         chatRoomDtoList.add(newChatRoomDto);
         return id;
     }

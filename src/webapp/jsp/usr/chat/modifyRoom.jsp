@@ -26,7 +26,7 @@ function ChatRoomSave__submitForm(form){
 }
 </script>
 
-<div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
+<div class="m-auto block p-6 rounded-lg shadow-lg bg-white max-w-md">
   <form method="POST" onsubmit="ChatRoomSave__submitForm(this); return false;">
     <div class="form-group mb-6">
       <input name ="title" type="text" class="form-control block
@@ -43,7 +43,7 @@ function ChatRoomSave__submitForm(form){
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"
-             placeholder="제목을 입력해주세요">
+             placeholder="제목을 입력해주세요" value="${room.title}">
     </div>
     <div class="form-group mb-6">
       <input name="writer" type="text" class="form-control block
@@ -60,7 +60,7 @@ function ChatRoomSave__submitForm(form){
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
-             placeholder="이름을 입력해주세요.">
+             placeholder="이름을 입력해주세요." value="${room.writer}">
     </div>
     <div class="form-group mb-6">
       <textarea name="body"
@@ -84,7 +84,7 @@ function ChatRoomSave__submitForm(form){
               id="exampleFormControlTextarea13"
               rows="3"
               placeholder="내용을 입력해주세요"
-      ></textarea>
+      >${room.body}</textarea>
     </div>
     <!--div class="form-group form-check text-center mb-6">
       <input type="checkbox"

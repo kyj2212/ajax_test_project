@@ -95,11 +95,11 @@ function ChatMessageSave__submitForm(form) {
         const html =`
             <article class="mb-12 mt-3">
             <h2 class="mb-4">
-                <a href="#" class="text-black text-xl md:text-2xl no-underline hover:underline">
+                <a href="#" class="text-gray-700 md:text-2xl no-underline hover:underline">
                     \${message.writer}
                 </a>
             </h2>
-            <p class="message-body mb-5 text-gray-700 leading-normal">
+            <p class="message-body mb-5 text-black text-xl leading-normal">
                  \${message.body}
             </p>
             <form class="hidden" onsubmit="ChatMessages__modify(this); return false;">
@@ -113,6 +113,9 @@ function ChatMessageSave__submitForm(form) {
                         <button type="submit"
                         class=" w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                         수정</button>
+                        <button onclick="Messages__hideModify(this); return false;"
+                        class="mt-2 w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                        수정 취소</button>
                 <!--button type="submit" class="mt-5 block mb-4 px-3 py-2 text-xs font-bold rounded-full no-underline hover:shadow bg-blue-600 text-white" value="\${message.body}">수정</button-->
             </form>
              <!--a href="/usr/chat/deleteMessage/\${message.id}" class="bg-black text-white no-underline py-2 px-3 rounded" >수정</a-->
